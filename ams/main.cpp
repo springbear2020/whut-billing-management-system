@@ -1,42 +1,45 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include<stdio.h>
+#include<stdlib.h>
+
 #include"menu.h"
 
+//º¯ÊıÃû£ºmain
+//¹¦ÄÜ£º³ÌĞòÈë¿Úº¯Êı
+//²ÎÊı£ºvoid
+//·µ»ØÖµ£º0´ú±í³ÌĞòÕı³£ÍË³ö£»·Ç0£º³ÌĞòÒì³£
 int main()
 {
-	int choice;//choiceè¡¨ç¤ºç”¨æˆ·çš„é€‰æ‹©
+	int choice;//choice±íÊ¾ÓÃ»§µÄ²Ëµ¥±àºÅ
 
-	printf("\n");
-	printf("\n");
-	printf("\n");
-	printf("\n");
-	printf("\n");
-	printf("\t\t\t\t\t\t*æ¬¢è¿è¿›å…¥æ”¶è´¹ç®¡ç†ç³»ç»Ÿ*\n\n\n\n\n");
+	printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t");
+	printf("*»¶Ó­½øÈëÊÕ·Ñ¹ÜÀíÏµÍ³*");
+	printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t");	
+	system("pause");
+	system("cls");
 
 	do {
-		outputMenu();//å‡½æ•°è°ƒç”¨
+		outputMenu();//º¯Êıµ÷ÓÃ£¬Êä³öÏµÍ³²Ëµ¥
 
-		choice = -1;//å˜é‡åˆå§‹åŒ–
-
-		printf("\t\t\t\t\t\tè¯·è¾“å…¥èœå•é¡¹ç¼–å·(0--8):");//è¾“å…¥æç¤º
+		printf("ÇëÊäÈë²Ëµ¥Ïî±àºÅ(0--8):");//ÊäÈëÌáÊ¾
 		scanf_s("%d", &choice);
 		printf("\n");
 
-		fflush(stdin);
-		
 		switch (choice) {
-		case 1:printf("\t\t\t\t\t\t-----æ·»åŠ å¡-----\n\n"); break;
-		case 2:printf("\t\t\t\t\t\t-----æŸ¥è¯¢å¡-----\n\n"); break;
-		case 3:printf("\t\t\t\t\t\t-----ä¸Šæœº-----\n\n"); break;
-		case 4:printf("\t\t\t\t\t\t-----ä¸‹æœº-----\n\n"); break;
-		case 5:printf("\t\t\t\t\t\t-----å……å€¼-----\n\n"); break;
-		case 6:printf("\t\t\t\t\t\t-----æ¶ˆè´¹-----\n\n"); break;
-		case 7:printf("\t\t\t\t\t\t-----æŸ¥è¯¢ç»Ÿè®¡------\n\n"); break;
-		case 8:printf("\t\t\t\t\t\t-----æ³¨é”€å¡-----\n\n"); break;
-		case 0:printf("\t\t\t\t\t\tè°¢è°¢æ‚¨ä½¿ç”¨æœ¬ç³»ç»Ÿ!\n\n"); break;
-		default:printf("\t\t\t\t\t\tæ‚¨è¾“å…¥çš„èœå•ç¼–å·æœ‰è¯¯!è¯·é‡æ–°è¾“å…¥!\n\n"); break;
+		case 1:printf("\t*Ìí¼Ó¿¨*\n\n"); add(); break;
+		case 2:printf("\t*²éÑ¯¿¨*\n\n"); query(); break;
+		case 3:printf("\t*ÉÏ»ú*\n\n"); break;
+		case 4:printf("\t*ÏÂ»ú*\n\n"); break;
+		case 5:printf("\t*³äÖµ*\n\n"); break;
+		case 6:printf("\t*Ïû·Ñ*\n\n"); break;
+		case 7:printf("\t*²éÑ¯Í³¼Æ*\n\n"); break;
+		case 8:printf("\t*×¢Ïú¿¨*\n\n"); break;
+		case 0:printf("Ğ»Ğ»ÄúÊ¹ÓÃ±¾ÏµÍ³!\n\n"); break;
+		default:printf("ÄúÊäÈëµÄ²Ëµ¥±àºÅÓĞÎó!ÇëÖØĞÂÊäÈë!\n\n"); break;
 		}
 	} while (choice != 0);
-	
+
 	return 0;
 }
 
