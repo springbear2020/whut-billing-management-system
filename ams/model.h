@@ -12,3 +12,10 @@ typedef struct Card
 	float fBalance;//余额
 	int nDel;//删除标识（0-未删除；1-删除）
 }Card;
+
+typedef struct CardNode
+{
+	Card data;//结点数据区
+	struct CardNode* next;//指向下一个节点的指针
+
+}CardNode,*lpCardNode;

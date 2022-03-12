@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
 #include<string.h>
+#include<stdlib.h>
 #include<time.h>
 
 #include"menu.h"
@@ -41,7 +42,7 @@ void add()
 	struct tm* endTime;//临时存放截止时间
 	struct tm* startTime;//临时存放开卡时间
 
-	printf("请输入卡号(长度为1~18):");
+	printf("请输入卡号(长度为1-18):");
 	scanf("%s", &name);
 	if (getSize(name) >= 18) //判断输入的卡号长度是否符合要求
 		printf("输入的卡号长度超过最大值");
@@ -53,7 +54,7 @@ void add()
 	}
 	strcpy(card.aName, name);//将输入的卡号保存到卡结构体变量中
 
-	printf("请输入密码(长度为1~8):");
+	printf("请输入密码(长度为1-8):");
 	scanf("%s", &pwd);
 	if (getSize(pwd) >= 8)//判断输入的密码长度是否符合要求
 		printf("输入的密码长度超过最大值！");
@@ -111,34 +112,85 @@ int getSize(const char* pString)
 //返回值：void
 void query()
 {
-	char name[18] = { 0 };//存放要查询的用户名
 	Card* pCard = NULL;
+	char name[18];//存放要查询的用户名
 	char aLastTime[30];//存放指定格式字符串的时间
+	int icha = 0;
+	int nIndex = 0;//卡查询到的信息数量
+	int i;
+
 //	struct tm* timeinfo;//临时存放从time_t转换过来的tm结构时间
 
 	printf("请输入要查询的卡号(长度为1~18):");
 	scanf("%s", &name);
 	printf("\n");
 
+	printf("||1.精确查询||2.模糊查询||(输入1或2)：");
+	scanf("%d", &icha);
+	printf("\n");
+
+	if (icha == 1)//选择精确查询
+		pCard = queryCard(name);
+	else//默认其它选择模糊查询
+		pCard = queryCards(name, &nIndex);
+
 	//从结构体数组中查找卡信息
-	pCard = queryCard(name);
+	//pCard = queryCard(name);
 
 	//如果pCard为NULL，表示没有该卡信息
 	if (pCard == NULL)
-		printf("----******------没有该卡信息！------******----\n");
-	else
 	{
-		printf("-------------******-------------查询到的卡信息如下-------------******-------------\n");
-		//输出表格的表头
-		printf("\t卡号\t状态\t余额\t累计金额\t使用次数\t上次使用时间\n");
-		//将time_t类型时间转换为字符串，字符串格式为年-月-日 时：分
-//		timeinfo = localtime(&(pCard->tLastTime));//time_t类型时间转换成tm结构时间
-//		strftime(aLastTime, 20,"%Y-%m-%d %H:%M" , timeinfo);//tm结构时间输出为指定格式字符串
-		timeToString(pCard->tLastTime, aLastTime);
-
-		//输出查到的卡信息
-		printf("\t%s\t%s\t%.2f\t%.2f\t\t%d\t\t%s\n", pCard->aName, pCard->nStatus, pCard->fBalance, pCard->fTotalUse, pCard->nUseCount, aLastTime);
-		printf("----------------------------------------------------------------------------------\n");
+		printf("----******------没有该卡信息！------******----\n");
 		printf("\n");
 	}
+	else
+	{
+		//将time_t类型时间转换为字符串，字符串格式为年-月-日 时：分
+		//timeinfo = localtime(&(pCard->tLastTime));//time_t类型时间转换成tm结构时间
+		//strftime(aLastTime, 20,"%Y-%m-%d %H:%M" , timeinfo);//tm结构时间输出为指定格式字符串		
+
+		if (icha == 1)//精确查询结果输出
+		{
+			//将time_t类型时间转换为字符串，字符串格式为年-月-日 时:分
+			timeToString(pCard->tLastTime, aLastTime);
+			
+			printf("-------------******-------------查询到的卡信息如下-------------******-------------\n");
+			//输出表格的表头
+			printf("\t卡号\t状态\t余额\t累计金额\t使用次数\t上次使用时间\n");
+
+			//输出查到的卡信息
+			printf("\t%s\t%s\t%.2f\t%.2f\t\t%d\t\t%s\n", pCard->aName, pCard->nStatus, pCard->fBalance, pCard->fTotalUse, pCard->nUseCount, aLastTime);
+			printf("----------------------------------------------------------------------------------\n");
+			printf("\n");
+		}
+		else
+		{
+			for (i = 0; i < nIndex; i++)
+			{
+				//将time_t类型时间转换为字符串，字符串格式为年-月-日 时:分
+				timeToString(pCard[i].tLastTime,aLastTime);//结构体指针当数组名使用
+
+				printf("-------------******-------------查询到的卡信息如下-------------******-------------\n");
+				//输出表格的表头
+				printf("\t卡号\t状态\t余额\t累计金额\t使用次数\t上次使用时间\n");
+
+				//输出查到的卡信息
+				printf("\t%s\t%s\t%.2f\t%.2f\t\t%d\t\t%s\n", pCard->aName, pCard->nStatus, pCard->fBalance, pCard->fTotalUse, pCard->nUseCount, aLastTime);
+				printf("----------------------------------------------------------------------------------\n");
+				printf("\n");
+			}
+			//释放动态分配的内存
+			free(pCard);
+		}
+		pCard = NULL;
+	}
+}
+
+//函数名：exitApp
+//功能：退出应用程序
+//参数：void
+//返回值：void
+void exitApp()
+{
+	releaseCardList();
 }

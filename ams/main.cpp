@@ -23,7 +23,7 @@ int main()
 		outputMenu();//函数调用，输出系统菜单
 
 		printf("请输入菜单项编号(0--8):");//输入提示
-		scanf_s("%d", &choice);
+		scanf("%d", &choice);
 		printf("\n");
 
 		switch (choice) {
@@ -35,7 +35,7 @@ int main()
 		case 6:printf("\t*消费*\n\n"); break;
 		case 7:printf("\t*查询统计*\n\n"); break;
 		case 8:printf("\t*注销卡*\n\n"); break;
-		case 0:printf("谢谢您使用本系统!\n\n"); break;
+		case 0:exitApp(); printf("谢谢您使用本系统!\n\n"); break;
 		default:printf("您输入的菜单编号有误!请重新输入!\n\n"); break;
 		}
 	} while (choice != 0);

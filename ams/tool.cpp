@@ -1,7 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include<stdio.h>
-#include<time.h>//包含时间类型文件
+#include<time.h>
 
 #include"tool.h"
 
