@@ -3,10 +3,9 @@
 #include<stdio.h>
 #include<string.h>
 
-#include"card_service.h"
 #include"model.h"
 #include"global.h"
-#include"card_file.h"
+#include"card_sevice.h"
 
 Card aCard[50];//卡结构体数组
 int nCount = 0;//卡结构体数组的实际信息数
@@ -39,10 +38,11 @@ int addCard(Card crd)
 		return FALSE;
 	}   */
 	//将卡信息保存到文件中
-if(TRUE==saveCard(&crd,CARDPATH))
+/*	if(TRUE==saveCard(&crd,CARDPATH))
 		return TRUE;
-	else
-		return FALSE;
+	else 
+		return FALSE;   
+		*/
 }
 
 //函数名：queryCard
