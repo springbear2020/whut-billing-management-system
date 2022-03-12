@@ -19,3 +19,39 @@ typedef struct CardNode
 	struct CardNode* next;//指向下一个节点的指针
 
 }CardNode,*lpCardNode;
+
+//消费信息结构体
+typedef struct Billing
+{
+	char aCardName[18];//卡号
+	time_t tStart;//上机时间
+	time_t tEnd;//下机时间
+	float fAmount;//消费金额
+	int nStatus;//消费状态，0-未结算，1-已经结算
+	int nDel;//删除标识，0-未删除，1-已删除
+}Billing;
+
+//上机信息结构体
+typedef struct LogonInfo
+{
+	char aCardName[18];//上机卡号
+	time_t tLogon;//上机时间
+	float fBalance;//上机时卡余额
+}LogonInfo;
+
+//计费信息结点
+typedef struct BillingNode
+{
+	Billing data;
+	struct BillingNode* next;
+}BillingNode,*lpBillingNode;
+
+//下机信息结构体
+typedef struct SettleInfo
+{
+	char aCardName[18];//卡号
+	time_t tStart;//上机时间
+	time_t tEnd;//下机时间
+	float fAmount;//消费金额
+	float fBalance;//余额
+}SettleInfo;

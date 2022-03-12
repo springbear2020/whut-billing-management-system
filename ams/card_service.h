@@ -7,4 +7,7 @@ int getCard();//从卡信息文件中，获取卡信息，保存到结构体数组中
 int initCardList(); //初始化卡信息链表
 void releaseCardList();//释放卡信息链表
 Card* queryCards(const char* pName, int* pIndex);//在卡信息链表中，模糊查询包含的所有卡信息
+Card* checkCard(const char* pName, const char* pPwd, int* pIndex);//从文件读取卡信息到链表，在链表中查询卡信息，并获取其在链表中的位置
+
+
 

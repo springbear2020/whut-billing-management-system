@@ -1,13 +1,15 @@
-#define _CRT_SECURE_NO_WARNINGS
-
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<time.h>
 
 #include"card_service.h"
 #include"model.h"
 #include"global.h"
 #include"card_file.h"
+#include"tool.h"
+#include"billing_file.h"
+#include"billing_service.h"
 
 
 //Card aCard[50];//卡结构体数组
@@ -21,58 +23,11 @@ lpCardNode cardList = NULL;//卡信息链表类型变量
 //返回值：整数1：添加成功；整数0：不能添加
 int addCard(Card crd)
 {
-	/*if (nCount < 50)//注释掉，待删除
-	{//数组未满，添加一条卡信息
-		strcpy(aCard[nCount].aName, crd.aName);
-		strcpy(aCard[nCount].aPwd, crd.aPwd);
-		aCard[nCount].nStatus = crd.nStatus;
-		aCard[nCount].tStart = crd.tStart;
-		aCard[nCount].tEnd = crd.tEnd;
-		aCard[nCount].fTotalUse = crd.fTotalUse;
-		aCard[nCount].tLastTime = crd.tLastTime;
-		aCard[nCount].nUseCount = crd.nUseCount;
-		aCard[nCount].fBalance = crd.fBalance;
-		aCard[nCount].nDel = crd.nDel;
-
-		nCount++;//计算自增1
-		return TRUE;
-	}
-	else
-	{
-		printf("数组已满，不能添加！");
-		return FALSE;
-	}              */
-	if (TRUE == saveCard(&crd, CARDPATH))
+	if (saveCard(&crd, CARDPATH) == TRUE)
 		return TRUE;
 	else
 		return FALSE;
 }
-
-/*
-//函数名：queryCard
-//功能：在结构体数组中查找指定卡号的卡信息
-//参数：用户输入的要查询的卡号地址
-//返回值：结构体数组中查询到的卡信息地址，没有找到返回NULL
-Card* queryCard(const char* pName)
-{
-	Card* pCard = NULL;
-	int i;
-
-	//如果从卡信息文件中读取卡信息失败，则返回NULL
-	if (getCard() == FALSE)
-		return NULL;
-
-	//在结构体数组中查找指定卡号
-	for (i = 0; i < nCount; i++)
-		if (strcmp(aCard[i].aName, pName) == 0)
-		{//在结构体数组中找到，返回卡信息地址
-			pCard = &aCard[i];
-			return pCard;
-		}
-	//没有找到，返回NULL
-	return pCard;
-}
-*/
 
 //函数名：querycard
 //功能：在链表中查找指定卡号的卡信息
@@ -170,27 +125,6 @@ int getCard()
 	}
 	return FALSE;
 }
-	/*
-	//清除结构体数组中已经存在的数据
-	memset(aCard, 0, 50 * sizeof(Card));//清空数组
-
-	//获取文件中的信息个数
-	nCount = getCardCount(CARDPATH);
-	if (nCount == 0)
-		return FALSE;
-	else if (nCount == -1)
-	{
-		printf("文件无法打开！");
-		return FALSE;
-	}
-	//如果返回NULL，表示读取卡信息失败
-	if (readCard(aCard, CARDPATH) == 0)
-		return FALSE;
-	return TRUE;
-	
-	*/
-
-
 
 //函数名：initCardList
 //功能：初始化卡信息链表
@@ -270,6 +204,36 @@ Card* queryCards(const char* pName, int* pIndex)
 
 		//移到链表的下一个结点
 		node = node->next;
-	}
+	} 
+
 	return pCard;
+}
+
+//函数名：checkCard
+//功能：从文件读取卡信息到链表，在链表中查询卡信息，并获取其在链表中的位置
+//参数：pName：上机卡号；pPwd：上机密码；pIndex：返回卡的索引号
+//返回值：上机卡结构体
+Card* checkCard(const char* pName, const char* pPwd, int* pIndex)
+{
+	lpCardNode cardNode = NULL;
+	int nIndex = 0;//上机卡在信息链表中的索引号
+	//如果从文件中获取卡信息失败，则上机失败
+	if (getCard() == FALSE)
+		return FALSE;
+	//指向链表
+	cardNode = cardList;
+	//遍历链表
+	while (cardNode != NULL)
+	{
+		//查找上机卡，判断卡号和密码是否正确
+		if ((strcmp(cardNode->data.aName, pName) == 0) && (strcmp(cardNode->data.aPwd, pPwd) == 0))
+		{
+			//返回卡信息结点数据的地址
+			*pIndex = nIndex;
+			return &cardNode->data;
+		}
+		cardNode = cardNode->next;
+		nIndex++;
+	}
+	return NULL;
 }

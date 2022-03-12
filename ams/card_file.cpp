@@ -1,5 +1,3 @@
-#define _CRT_SECURE_NO_WARNINGS
-
 #include<iostream>
 #include<fstream>
 
@@ -12,6 +10,7 @@
 #include"global.h"
 #include"tool.h"
 
+#define CARDCHARNUM 256  //从卡信息文件读取得字符数最大值
 
 using namespace std;
 
@@ -44,8 +43,6 @@ int saveCard(const Card* pCard, const char* pPath)
 	cout << "----******----卡信息成功存入文件！-----******----" << endl;
 	return TRUE;
 }
-
-#define CARDCHARNUM 256  //从卡信息文件读取得字符数最大值
 
 //函数名：readCard
 //功能：从文件中读取卡信息到结构体数组
@@ -94,13 +91,13 @@ Card praseCard(char* pBuf)
 	buf = pBuf;//第一次调用strtok函数时，buf为解析字符串
 	while ((str = strtok(buf, "##")) != NULL)
 	{
-		strcpy(flag[index], str);
+		strcpy_s(flag[index], str);
 		buf = NULL;//后面调用strtok函数时，第一个参数为NULL
 		index++;
 	}
 	//分割的内容保存到结构体中
-	strcpy(card.aName, flag[0]);
-	strcpy(card.aPwd, flag[1]);
+	strcpy_s(card.aName, flag[0]);
+	strcpy_s(card.aPwd, flag[1]);
 	card.nStatus = atoi(flag[2]);
 	card.tStart = stringToTime(flag[3]);
 	card.tEnd = stringToTime(flag[4]);
@@ -143,4 +140,59 @@ int getCardCount(const char* pPath)
 	//关闭文件
 	ifile.close();
 	return nIndex;
+}
+
+//函数名：updateCard
+//功能：更新卡信息文件中对应的一条卡信息
+//参数：pCard：更新后的卡内容 pPath：卡信息文件的路径
+//      nIndex:需要更新的卡信息在文件中的卡序号
+//返回值：TRUE:更新成功，FALSE:更新失败
+int updateCard(const Card* pCard, const char* pPath, int nIndex)
+{
+	char aBuf[CARDCHARNUM] = { 0 };
+	char aStart[30];//存放转换后的时间字符串
+	char aEnd[30];//存放转换后的时间字符串
+	char aLast[30];//存放转换后的时间字符串
+	int nLine = 0;//文件中当前卡序号
+	long lPosition = 0;//文件位置标记
+
+	//将time_t类型时间转换为字符串，字符串格式为“年-月-日 时：分”
+	timeToString(pCard->tStart, aStart);
+	timeToString(pCard->tEnd, aEnd);
+	timeToString(pCard->tLastTime, aLast);
+
+	//以读写模式打开文件，是默认方式，如果失败，返回FALSE
+	fstream iofile(pPath, ios_base::out | ios_base::in);
+	if (!iofile.is_open())
+	{
+		cout << "文件无法正确打开！不能更新卡信息！" << endl;
+		iofile.close();
+		return FALSE;
+	}
+
+	//遍历文件，获取卡在文件中的位置
+	while ((!iofile.eof()) && (nLine < nIndex))
+	{
+		memset(aBuf, 0, CARDCHARNUM);//清空字符数组
+		//逐行读取文件信息
+		iofile.getline(aBuf, CARDCHARNUM);
+		//获取文件标识位置，最后一次是找到的位置
+		lPosition = iofile.tellg();
+		nLine++;
+	}
+	//移到文件标识位置
+	//注意指针是在该条卡信息之后还是之前！！！
+	//上面得到的读指针在下一条卡信息开头，要移到本条卡信息开头处
+	iofile.seekp(lPosition - strlen(aBuf) - 2, ios::beg);
+
+	//向文件写入更新的卡信息
+	iofile << pCard->aName << "##" << pCard->aPwd << "##" << pCard->nStatus << "##";
+	iofile << aStart << "##" << aEnd << "##" << pCard->fTotalUse << "##" << aLast << "##";
+	iofile << pCard->nUseCount << "##" << pCard->fBalance << "##" << pCard->nDel << endl;
+
+	cout << "----******----卡信息更新到文件成功！-----******----" << endl << endl;
+
+	//关闭文件
+	iofile.close();
+	return TRUE;
 }
