@@ -1,17 +1,17 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
 #include<fstream>
 #include<istream>
-#include<stdio.h>
 
 #include"model.h"
 #include"global.h"
 
 using namespace std;
 
-//函数名：saveBilling
-//功能：保存计费信息
-//参数：pBilling:计费信息结构指针；pPath:保存计费信息文件路径
-//返回值：TRUE:保存成功；FALSE:保存失败
+//函数名:saveBilling
+//功能:保存计费信息
+//参数:pBilling:计费信息结构指针；pPath:保存计费信息文件路径
+//返回值:TRUE:保存成功；FALSE:保存失败
 int saveBilling(const Billing* pBilling, const char* pPath)
 {
 	//以追加方式，二进制方式写入
@@ -23,7 +23,7 @@ int saveBilling(const Billing* pBilling, const char* pPath)
 		return FALSE;
 	}
 	//将计费信息保存到文件中
-	ofile.write((const char*)pBilling, sizeof(Billing));
+	ofile.write((const char *)pBilling, sizeof(Billing));
 
 	//关闭文件
 	ofile.close();
@@ -31,17 +31,17 @@ int saveBilling(const Billing* pBilling, const char* pPath)
 	return TRUE;
 }
 
-//函数名：readBilling
-//功能：读取计费信息
-//参数：pBilling:计费信息结构体指针  pPath
-//返回值：TRUE 读取成功  FALSE 读取失败
+//函数名:readBilling
+//功能:读取计费信息
+//参数:pBilling:计费信息结构体指针  pPath
+//返回值:TRUE 读取成功  FALSE 读取失败
 int readBilling(Billing* pBilling, const char* pPath)
 {
 	int nIndex = 0;
 
 	//以二进制方式读取
 	ifstream ifile(pPath, ios_base::in | ios_base::binary);
-	if (!ifile.is_open())
+	if(!ifile.is_open())
 	{
 		printf("文件无法正确打开！不能读取计费信息!\n");
 		ifile.close();
@@ -58,7 +58,7 @@ int readBilling(Billing* pBilling, const char* pPath)
 			{
 				nIndex++;
 			}
-
+				
 		}
 		//关闭文件
 		ifile.close();
@@ -66,10 +66,10 @@ int readBilling(Billing* pBilling, const char* pPath)
 	}
 }
 
-//函数名：getBillingCount
-//功能：获取文件中计费信息数量
-//参数：计费信息文件路径
-//返回值：计费信息数量
+//函数名:getBillingCount
+//功能:获取文件中计费信息数量
+//参数:计费信息文件路径
+//返回值:计费信息数量
 int getBillingCount(const char* pPath)
 {
 	int nCount = 0;
@@ -77,7 +77,7 @@ int getBillingCount(const char* pPath)
 	//以二进制方式读取
 	ifstream ifile(pPath, ios_base::in | ios_base::binary);
 	if (!ifile.is_open())
-	{
+	{    //遍历文件
 		printf("文件无法正确打开！不能读取计费信息!\n");
 		ifile.close();
 		return FALSE;
@@ -100,10 +100,10 @@ int getBillingCount(const char* pPath)
 	}
 }
 
-//函数名：updateBilling
-//功能：更新计费信息文件中的一条信息
-//参数：pBilling:指向计费信息结构体；pPath:计费信息文件路径；nIndex:计费信息序号
-//返回值：TREU:成功；FALSE:失败
+//函数名:updateBilling
+//功能:更新计费信息文件中的一条信息
+//参数:pBilling:指向计费信息结构体；pPath:计费信息文件路径；nIndex:计费信息序号
+//返回值:TREU:成功；FALSE:失败
 int updateBilling(const Billing* pBilling, const char* pPath, int nIndex)
 {
 	int nCount = 0;
@@ -133,7 +133,7 @@ int updateBilling(const Billing* pBilling, const char* pPath, int nIndex)
 	//移动到文件标识位置
 	//注意指针是在该条消费之后还是之前！！！
 	//上面得到的读写指针在下一条信息开头，要移动到本条信息开头处
-	iofile.seekp(lPosition - sizeof(Billing), ios_base::beg);
+	iofile.seekp((__int64)lPosition - sizeof(Billing), ios_base::beg);
 	//更新消费信息到文件
 	iofile.write((const char*)(pBilling), sizeof(Billing));
 	printf("----*****----消费信息更新到文件成功！----*****----\n");

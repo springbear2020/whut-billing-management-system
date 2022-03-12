@@ -1,40 +1,41 @@
+ï»¿#define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
 #include<stdlib.h>
 
 #include"menu.h"
 
-//º¯ÊıÃû£ºmain
-//¹¦ÄÜ£º³ÌĞòÈë¿Úº¯Êı
-//²ÎÊı£ºvoid
-//·µ»ØÖµ£º0´ú±í³ÌĞòÕı³£ÍË³ö£»·Ç0£º³ÌĞòÒì³£
+//å‡½æ•°åï¼šmain
+//åŠŸèƒ½ï¼šç¨‹åºå…¥å£å‡½æ•°
+//å‚æ•°ï¼švoid
+//è¿”å›å€¼ï¼š0ä»£è¡¨ç¨‹åºæ­£å¸¸é€€å‡ºï¼›é0ï¼šç¨‹åºå¼‚å¸¸
 int main()
 {
-	int choice;//choice±íÊ¾ÓÃ»§µÄ²Ëµ¥±àºÅ
+	int choice;//choiceè¡¨ç¤ºç”¨æˆ·çš„èœå•ç¼–å·
 
 	printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t");
-	printf("*»¶Ó­½øÈëÊÕ·Ñ¹ÜÀíÏµÍ³*");
+	printf("*æ¬¢è¿è¿›å…¥æ”¶è´¹ç®¡ç†ç³»ç»Ÿ*");
 	printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t");
 	system("pause");
 	system("cls");
 
 	do {
-		outputMenu();//º¯Êıµ÷ÓÃ£¬Êä³öÏµÍ³²Ëµ¥
+		outputMenu();//å‡½æ•°è°ƒç”¨ï¼Œè¾“å‡ºç³»ç»Ÿèœå•
 
-		printf("ÇëÊäÈë²Ëµ¥Ïî±àºÅ(0--8):");//ÊäÈëÌáÊ¾
+		printf("è¯·è¾“å…¥èœå•é¡¹ç¼–å·(0--8):");//è¾“å…¥æç¤º
 		scanf("%d", &choice);
 		printf("\n");
 
 		switch (choice) {
-		case 1:printf("\t*Ìí¼Ó¿¨*\n\n"); add(); break;
-		case 2:printf("\t*²éÑ¯¿¨*\n\n"); query(); break;
-		case 3:printf("\t*ÉÏ»ú*\n\n"); logon(); break;
-		case 4:printf("\t*ÏÂ»ú*\n\n"); settle(); break;
-		case 5:printf("\t*³äÖµ*\n\n"); addMoney(); break;
-		case 6:printf("\t*Ïû·Ñ*\n\n"); break;
-		case 7:printf("\t*²éÑ¯Í³¼Æ*\n\n"); break;
-		case 8:printf("\t*×¢Ïú¿¨*\n\n"); break;
-		case 0:exitApp(); printf("Ğ»Ğ»ÄúÊ¹ÓÃ±¾ÏµÍ³!\n\n"); break;
-		default:printf("ÄúÊäÈëµÄ²Ëµ¥±àºÅÓĞÎó!ÇëÖØĞÂÊäÈë!\n\n"); break;
+		case 1:printf("\t*æ·»åŠ å¡*\n\n"); add(); break;
+		case 2:printf("\t*æŸ¥è¯¢å¡*\n\n"); query(); break;
+		case 3:printf("\t*ä¸Šæœº*\n\n"); logon(); break;
+		case 4:printf("\t*ä¸‹æœº*\n\n"); settle(); break;
+		case 5:printf("\t*å……å€¼*\n\n"); addMoney(); break;
+		case 6:printf("\t*æ¶ˆè´¹*\n\n"); refundMoney(); break;
+		case 7:printf("\t*æŸ¥è¯¢ç»Ÿè®¡*\n\n"); break;
+		case 8:printf("\t*æ³¨é”€å¡*\n\n"); annul(); break;
+		case 0:printf("è°¢è°¢æ‚¨ä½¿ç”¨æœ¬ç³»ç»Ÿ!\n\n"); exitApp();  break;
+		default:printf("æ‚¨è¾“å…¥çš„èœå•ç¼–å·æœ‰è¯¯!è¯·é‡æ–°è¾“å…¥!\n\n"); break;
 		}
 	} while (choice != 0);
 
