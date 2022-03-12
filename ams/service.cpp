@@ -9,6 +9,7 @@
 #include"card_service.h"
 #include"billing_file.h"
 #include"billing_service.h"
+#include"money_file.h"
 
 //函数名：addCardInfo
 //功能：添加卡信息
@@ -205,4 +206,101 @@ double getAmount(time_t tStart)
 	//计算消费金额
 	dbAmount = nCount * CHARGE;
 	return dbAmount;
+}
+
+//函数名：doAddmoney
+//功能：进行充值操作
+//参数：pName：充值卡的卡号；pPwd：充值卡的密码；pMoney：充值信息
+//返回值：int：充值的结果：TRUE:充值成功，FALSE:充值失败
+/*int doAddMoney(const char* pName, const char* pPwd, MoneyInfo* pMoneyInfo)
+{
+	Card* pCard = NULL;
+	int nIndex = 0;//卡信息在链表中的索引号
+	Money sMoney;
+
+	//查询充值卡
+	pCard = checkCard(pName, pPwd, &nIndex);
+
+	//如果卡信息为空，表示没有该卡信息，充值失败
+	if (pCard == NULL)
+	{
+		printf("无该卡信息！不能充值！\n");
+		return FALSE;
+	}
+
+	//判断该卡是否未使用或正在上机，只有未使用和正在上机的卡才能进行充值操作
+	if (pCard->nStatus != 0 && pCard->nStatus != 1)
+		return FALSE;
+	//如果可以充值，更新卡信息
+	pCard->fBalance += pMoneyInfo->fMoney;
+	pCard->fTotalUse += pMoneyInfo->fMoney;
+
+	//更新文件中的卡信息
+	if (updateCard(pCard, CARDPATH, nIndex) == FALSE)
+		return FALSE;
+
+	//组装充值信息
+	strcpy(sMoney.aCardName, pCard->aName);
+	sMoney.tTime = time(NULL);
+	sMoney.nStatus = 0;
+	sMoney.fMoney = pMoneyInfo->fMoney;
+	sMoney.nDel = 0;
+
+	//将充值记录保存到文件中
+	if (saveMoney(&sMoney, MONEYPATH) == TRUE)
+	{
+		//组装界面显示的充值信息
+		strcpy(pMoneyInfo->aCardName, sMoney.aCardName);
+		pMoneyInfo->fBalance = pCard->fBalance;
+
+		return TRUE;
+	}
+	return FALSE;
+}
+*/
+int doAddMoney(const char* pName, const char* pPwd, MoneyInfo* pMoneyInfo)
+{
+	Card* pCard = NULL;
+	int nIndex = 0;			//卡信息在链表中的索引号
+	Money sMoney;
+	//查询卡充值
+	pCard = checkCard(pName, pPwd, &nIndex);
+
+	//如果卡信息为空，表示没有该卡信息，充值失败
+	if (pCard == NULL)
+	{
+		printf("无该卡信息，不能充值！\n");
+		return FALSE;
+	}
+	//判断该卡是否未使用或正在上机，只有未使用和正在上机的卡才能进行充值操作
+	if (pCard->nStatus != 0 && pCard->nStatus != 1)
+	{
+		return FALSE;
+	}
+	//如果可以充值，更新卡信息
+	pCard->fBalance += pMoneyInfo->fMoney;
+	pCard->fTotalUse += pMoneyInfo->fMoney;
+
+	//更新文件中的卡信息文件
+	if (FALSE == updateCard(pCard, CARDPATH, nIndex))
+	{
+		return FALSE;
+	}
+	//组装充值信息
+	strcpy(sMoney.aCardName, pCard->aName);
+	sMoney.tTime = time(NULL);
+	sMoney.nStatus = 0;
+	sMoney.fMoney = pMoneyInfo->fMoney;
+	sMoney.nDel = 0;
+
+	//将充值记录保存到文件中
+	if (TRUE == saveMoney(&sMoney, MONEYPATH))
+	{
+		//组装界面显示的充值信息
+		strcpy(pMoneyInfo->aCardName, sMoney.aCardName);
+		pMoneyInfo->fBalance = pCard->fBalance;
+
+		return TRUE;
+	}
+	return FALSE;
 }

@@ -8,3 +8,4 @@ int doLogon(const char* pName, const char* pPwd, LogonInfo* pInfo);//½øĞĞÉÏ»ú²Ù×
 void releaseList();//ÍË³öÓ¦ÓÃ³ÌĞòÊ±£¬ÊÍ·ÅÁ´±íÄÚ´æ
 int doSettle(const char* pName, const char* pPwd, SettleInfo* pInfo);//½øĞĞÏÂ»ú²Ù×÷
 double getAmount(time_t tStart);//¸ù¾İÉÏ»úÊ±¼ä£¬¼ÆËãÏû·Ñ½ğ¶î
+int doAddMoney(const char* pName, const char* pPwd, MoneyInfo* pMoneyInfo);//½øĞĞ³äÖµ²Ù×÷

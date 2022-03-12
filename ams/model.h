@@ -55,3 +55,21 @@ typedef struct SettleInfo
 	float fAmount;//消费金额
 	float fBalance;//余额
 }SettleInfo;
+
+//充值退费结构体
+typedef struct Money
+{
+	char aCardName[18];//卡号
+	time_t tTime;//充值退费时间
+	int nStatus;//状态：0-充值；1-退费
+	float fMoney;//充值退费金额
+	int nDel;//删除标识，0-未删除，1-删除
+}Money;
+
+//充值退费信息结构体
+typedef struct MoneyInfo
+{
+	char aCardName[18];//卡号
+	float fMoney;//充值退费金额
+	float fBalance;//余额
+}MoneyInfo;

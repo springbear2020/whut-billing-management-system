@@ -318,3 +318,84 @@ void settle()
 	}
 	free(pInfo);
 }
+
+//函数名：addMoney
+//功能：充值
+//参数：void
+//返回值：void
+/*void addMoney()
+{
+	char aName[18] = { 0 };//卡号
+	char aPwd[8] = { 0 };//密码
+	float fAmount = 0;//充值金额
+	MoneyInfo sMoneyInfo;//充值信息
+
+	printf("请输入要充值的卡号（长度为1~18）:");//输入提示
+	scanf("%s", &aName);
+	printf("请输入充值卡的密码（长度为1~8）:");//输入提示
+	scanf("%s", &aPwd);
+	printf("请输入充值金额（RMB）：");//输入提示
+	scanf("%lf", &fAmount);
+
+	//保存充值金额
+	sMoneyInfo.fMoney = fAmount;
+
+	//判断充值是否成功
+	if (doAddMoney(aName, aPwd, &sMoneyInfo) == TRUE)
+	{
+		//提示充值信息
+		printf("-----***-----充值信息如下-----***-----\n");
+		//输出表格表头
+		printf("\t卡号\t充值金额\t余额\n");
+		//输出充值卡信息
+		printf("\t%s\t%2f\t%.2f\n\n", sMoneyInfo.aCardName, sMoneyInfo.fMoney, sMoneyInfo.fBalance);
+	}
+	else
+		printf("------充值失败！------\n");
+}
+*/
+void addMoney()
+{
+	char aName[18] = { 0 };		//卡号
+	char aPwd[8] = { 0 };			//密码
+	float fAmount = 0;			//充值金额
+	MoneyInfo sMoneyInfo;		//充值卡信息
+
+	printf("请输入充值的卡号（长度1~18）：");
+	scanf_s("%s", aName, 18);
+	//判断输入的卡号是否符合要求
+	if (getSize(aName) >= 18)
+	{
+		printf("输入的卡号长度超过最大值！\n");
+		return;
+	}
+
+	printf("请输入充值密码（长度1~8）：");
+	scanf_s("%s", aPwd, 8);
+	//判断输入的密码是否符合要求
+	if (getSize(aPwd) >= 8)
+	{
+		printf("输入的密码长度超过最大值！\n");
+		return;
+	}
+
+	printf( "请输入充值金额（RMB)：");
+	scanf(" %lf",fAmount);
+
+	//保存充值金额
+	sMoneyInfo.fMoney = fAmount;
+	//判断是否保存成功
+	if (TRUE == doAddMoney(aName, aPwd, &sMoneyInfo))
+	{
+		//提示充值信息
+		printf("-----***---充值信息如下---***-----\n");
+		//输出表格头
+		printf("\t卡号\t充值金额\t余额\n");
+		//输出充值卡信息
+		printf("\t%s\t%.2f    \t%.2f\n", sMoneyInfo.aCardName, sMoneyInfo.fMoney, sMoneyInfo.fBalance);
+	}
+	else
+	{
+		printf("-------充值失败！-------\n");
+	}
+}
