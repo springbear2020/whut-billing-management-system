@@ -8,7 +8,7 @@
 #define UNIT 15  //最小收费单元（分钟）
 #define CHARGE 0.5//每个计费单元收费(RMB:元）
 
-#define CARDPATH  "data\\card.ams"      //卡信息保存路径
-#define BILLINGPATH "data\\billing.ams"   //计费信息保存路径
-#define MONEYPATH "data\\money.ams"		  //充值退费信息保存路径
+#define CARDPATH  "res\\card.ams"      //卡信息保存路径
+#define BILLINGPATH "res\\billing.ams"   //计费信息保存路径
+#define MONEYPATH "res\\money.ams"		  //充值退费信息保存路径
 
