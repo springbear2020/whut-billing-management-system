@@ -18,6 +18,29 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="billing_file.h" />
+    <ClInclude Include="billing_service.h" />
+    <ClInclude Include="card_file.h" />
+    <ClInclude Include="card_service.h" />
+    <ClInclude Include="global.h" />
+    <ClInclude Include="menu.h" />
+    <ClInclude Include="model.h" />
+    <ClInclude Include="money_file.h" />
+    <ClInclude Include="service.h" />
+    <ClInclude Include="tool.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="billing_file.cpp" />
+    <ClCompile Include="billing_service.cpp" />
+    <ClCompile Include="card_file.cpp" />
+    <ClCompile Include="card_service.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="menu.cpp" />
+    <ClCompile Include="money_file.cpp" />
+    <ClCompile Include="service.cpp" />
+    <ClCompile Include="tool.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -138,13 +161,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="C:\Users\SpringBear\Desktop\AMS\lab1\main.cpp" />
-    <ClCompile Include="C:\Users\SpringBear\Desktop\AMS\lab1\menu.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="C:\Users\SpringBear\Desktop\AMS\lab1\menu.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

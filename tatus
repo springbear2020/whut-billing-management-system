@@ -1,0 +1,53 @@
+[33mcommit e26888bf6da5f593ad52c630c7e4ebe8c4f80c1e[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Spring-_-Bear <springbear2020@163.com>
+Date:   Sat May 14 11:03:14 2022 +0000
+
+    update README.md.
+
+[33mcommit 1945abae8831b24718ce2048ed1b5c32e987633b[m
+Author: bear <springbear2020@163.com>
+Date:   Sat Mar 12 19:49:12 2022 +0800
+
+    Add the doc directory and README file
+
+[33mcommit 3955e4ec72f3aa857ac81fccac01f9e5b595f851[m
+Author: bear <springbear2020@163.com>
+Date:   Sat Mar 12 19:48:16 2022 +0800
+
+    Using the binary byte data to save the billing info and complete the function of toping up
+
+[33mcommit 9319a65123c2a00e5451f2a965a862389fa915f4[m
+Author: bear <springbear2020@163.com>
+Date:   Sat Mar 12 19:46:49 2022 +0800
+
+    Off line
+
+[33mcommit 25ec96bca8e6875f6fbca6e6537c1b7c77551550[m
+Author: bear <springbear2020@163.com>
+Date:   Sat Mar 12 19:46:14 2022 +0800
+
+    Stage 6 - Online
+
+[33mcommit 7cdfe1a584a1d843dbc341bbc93583a54dfa65f5[m
+Author: bear <springbear2020@163.com>
+Date:   Sat Mar 12 19:44:47 2022 +0800
+
+    Using the linked list to save the user info
+
+[33mcommit 0cdda2f0b32f05f8a7df132bb804c485e381e489[m
+Author: bear <springbear2020@163.com>
+Date:   Sat Mar 12 19:43:20 2022 +0800
+
+    Stage 3 - Save the billing info into the file
+
+[33mcommit 3fc0a86eb4bb96684d8d20f87e8eb8096ad9c2ed[m
+Author: bear <springbear2020@163.com>
+Date:   Sat Mar 12 19:42:16 2022 +0800
+
+    Stage 2 - Save the info to the struct, and query the added info from the array of the info struct
+
+[33mcommit c50e34c0a878624e0afb47e7ea541521260c8d13[m
+Author: bear <springbear2020@163.com>
+Date:   Sat Mar 12 19:39:38 2022 +0800
+
+    Stage 1 - Dispaly the menu of the system

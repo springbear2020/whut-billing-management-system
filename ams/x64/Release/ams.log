@@ -1,0 +1,14 @@
+﻿  billing_file.cpp
+  billing_service.cpp
+  card_file.cpp
+  card_service.cpp
+  main.cpp
+  menu.cpp
+  money_file.cpp
+  service.cpp
+  tool.cpp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 214 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  ams.vcxproj -> E:\Project\C++\account-management-system\x64\Release\ams.exe
