@@ -1,8 +1,8 @@
 <p align="center">
-    <img src="https://img.shields.io/static/v1?label=开发时间&message=20/02-20/04&color=007bff"/>
-    <img src="https://img.shields.io/static/v1?label=开发环境&message=VisualStudio2019&color=ffc107"/>
-    <a href="https://github.com/springbear2020/whut-billing-management-system">
-    	<img src="https://img.shields.io/static/v1?label=开源项目&message=whut-bms&color=28a745"/>
+    <img src="https://img.shields.io/static/v1?label=%E5%BC%80%E5%8F%91%E6%97%B6%E9%97%B4&message=20/02-20/04&color=007bff"/>
+    <img src="https://img.shields.io/static/v1?label=%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83&message=VisualStudio2019&color=ffc107"/>
+    <a href="https://github.com/springbear2020/whut-billing-management-system" target="_blank">
+    	<img src="https://img.shields.io/static/v1?label=%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE&message=whut-bms&color=28a745"/>
     </a>
 </p>
 
@@ -24,11 +24,11 @@ whut-billing-management-system -- 工程文件
 	|—— cardxxx 	-- 卡操作
 	|—— global.h 	-- 全局常量
 	|—— menuxxx 	-- UI 菜单
-	|—— model.h		-- 结构体
+	|—— model.h	-- 结构体
 	|—— moneyxxx 	-- 费用文件操作
 	|—— servicexxx 	-- 核心业务服务
-	|—— tool 		-- 工具函数
-	|—— data 		-- 业务数据目录
+	|—— tool 	-- 工具函数
+	|—— data 	-- 业务数据目录
 |—— document -- 资源文件
 	|—— img -- 系统效果展示图片
 	|—— pdf -- 项目开发指导文件
@@ -37,7 +37,7 @@ whut-billing-management-system -- 工程文件
 
 # 四、功能架构
 
-![功能架构](document\img\功能架构.png)
+![功能架构](document/img/功能架构.png)
 
 # 五、项目迭代
 
