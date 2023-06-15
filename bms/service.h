@@ -1,5 +1,5 @@
 #pragma once
-// 函数声明
+
 int addCardInfo(Card card);                                                    // 添加卡信息
 Card *queryCardInfo(const char *pName);                                        // 模糊查询卡信息
 Card *queryCardsInfo(const char *pName, int *pIndex);                          // 模糊查询卡信息

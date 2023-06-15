@@ -1,4 +1,5 @@
 #pragma once
+
 #include <time.h>
 
 typedef struct Card

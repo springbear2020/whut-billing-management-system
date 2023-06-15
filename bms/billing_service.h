@@ -1,6 +1,7 @@
 #pragma once
+
 #include "model.h"
-// 函数声明
+
 int addBilling(const char *pName, Billing *pBilling);  // 上机时添加消费信息到文件
 void initBillingList();                                // 初始化计费信息链表
 void releaseBillingList();                             // 释放计费信息链表

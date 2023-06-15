@@ -1,5 +1,5 @@
 #pragma once
-// 函数声明
+
 void outputMenu();                // 输出系统菜单
 void add();                       // 添加用户卡信息到卡结构体变量，并屏幕显示
 int getSize(const char *pString); // 计算字符数组中字符长度

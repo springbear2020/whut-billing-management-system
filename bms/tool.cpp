@@ -1,7 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h> //包含时间类型头文件//[函数名]
+#include <time.h>
 
 // 函数:timeToString
 // 功能:将time_t类型转化为字符串，字符串格式为“年-月-日 时：分”

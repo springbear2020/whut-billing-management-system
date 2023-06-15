@@ -1,6 +1,7 @@
 #pragma once
+
 #include "model.h"
-// 函数声明
+
 int addCard(Card crd);                                             // 添加卡信息到结构体数组
 Card *queryCard(const char *pName);                                // 在结构体数组中查询指定卡号的信息
 int getCard();                                                     // 从卡信息文件中，获取卡信息
